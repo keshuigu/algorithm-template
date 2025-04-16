@@ -1,4 +1,6 @@
 #include "algorithm_template/bits_trick.h"
+
+#include <algorithm>
 namespace algorithm_template {
 std::string IntToBinaryString(int x) {
   std::string res;

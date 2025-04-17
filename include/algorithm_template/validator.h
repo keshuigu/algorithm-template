@@ -2,15 +2,12 @@
 #define ALGORITHM_TEMPLATE_VALIDATOR_
 #include <sstream>
 #include <string>
-#include <vector>
 #include <unordered_set>
+#include <vector>
+
+#include "algorithm_template/common.h"
 
 namespace algorithm_template {
-
-template <typename T>
-concept Streamable = requires(std::ostream& os, T t) {
-  { os << t } -> std::convertible_to<std::ostream&>;
-};
 
 // 打印vector<int>内容
 template <Streamable T>

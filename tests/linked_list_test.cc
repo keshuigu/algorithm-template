@@ -134,7 +134,7 @@ TEST(LinkedListTest, MergeKListsTest) {
     int k = disK(gen);
     std::vector<int> expect;
     std::vector<IntList*> lists(k);
-    IntList* head =nullptr,*p = nullptr;
+    IntList *head = nullptr, *p = nullptr;
     for (int i = 0; i < k; i++) {
       int n = disN(gen);
       std::vector<int> h = RandomArray(n, V);
@@ -166,4 +166,105 @@ TEST(LinkedListTest, MergeKListsTest) {
   }
 }
 
+TEST(LinkedListTest, AddTwoNumbersTest) {
+  int N = 500;
+  int V = 1000000;
+  int epoch = 500;
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  std::uniform_int_distribution<> disN(0, N);
+  std::uniform_int_distribution<> disV(0, V);
+  typedef LinkedList<int> IntList;
+  for (int i = 0; i < epoch; i++) {
+    int d1 = disV(gen);
+    int d2 = disV(gen);
+    int expect = d1 + d2;
+    // d1
+    IntList* head = new IntList(d1 % 10);
+    IntList* p1 = head;
+    d1 /= 10;
+    while (d1 > 0) {
+      head->next = new IntList(d1 % 10);
+      d1 /= 10;
+      head = head->next;
+    }
+    // d2
+    head = new IntList(d2 % 10);
+    IntList* p2 = head;
+    d2 /= 10;
+    while (d2 > 0) {
+      head->next = new IntList(d2 % 10);
+      d2 /= 10;
+      head = head->next;
+    }
+    IntList* p3 = AddTwoNumbers(p1, p2);
+    int result = 0;
+    int fac = 1;
+    while (p3 != nullptr) {
+      result = result + p3->val * fac;
+      fac *= 10;
+      p3 = p3->next;
+    }
+    ASSERT_EQ(result, expect);
+    head = p1;
+    while (head != nullptr) {
+      p1 = head;
+      head = head->next;
+      delete p1;
+    }
+    head = p2;
+    while (head != nullptr) {
+      p2 = head;
+      head = head->next;
+      delete p2;
+    }
+  }
+}
+
+TEST(LinkedListTest, PartitionTest) {
+  int N = 100;
+  int V = 1000;
+  int epoch = 5000;
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  std::uniform_int_distribution<> disN(0, N);
+  std::uniform_int_distribution<> disV(0, 2 * V);
+  typedef LinkedList<int> IntList;
+  for (int i = 0; i < epoch; i++) {
+    int n = disN(gen);
+    std::vector<int> h1 = RandomArray(n, V);
+    IntList* head = n == 0 ? nullptr : new IntList(h1[0]);
+    IntList* p = head;
+    for (int j = 0; j < n - 1; j++) {
+      p->next = new IntList(h1[j + 1]);
+      p = p->next;
+    }
+
+    std::vector<int> expect1;
+    std::vector<int> expect2;
+
+    int v = disV(gen);
+    head = Partition(head, v);
+    std::vector<int> result;
+    p = head;
+    while (p != nullptr) {
+      result.push_back(p->val);
+      p = p->next;
+    }
+    for (int i = 0; i < h1.size(); i++) {
+      if (h1[i] < v) {
+        expect1.push_back(h1[i]);
+      } else {
+        expect2.push_back(h1[i]);
+      }
+    }
+    expect1.insert(expect1.end(), expect2.begin(), expect2.end());
+    ASSERT_EQ(result, expect1) << v;
+    while (head != nullptr) {
+      p = head;
+      head = head->next;
+      delete p;
+    }
+  }
+}
 }  // namespace algorithm_template

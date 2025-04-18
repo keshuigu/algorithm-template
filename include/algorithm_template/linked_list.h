@@ -83,7 +83,7 @@ DualLinkedList<T>* ReverseDualLinkedList(DualLinkedList<T>* head) {
   return prev;
 }
 
-//https://leetcode.cn/problems/merge-two-sorted-lists/description/
+// https://leetcode.cn/problems/merge-two-sorted-lists/description/
 template <std::totally_ordered T>
 LinkedList<T>* MergeTwoLists(LinkedList<T>* list1, LinkedList<T>* list2) {
   if (list1 == nullptr) {
@@ -113,7 +113,6 @@ LinkedList<T>* MergeTwoLists(LinkedList<T>* list1, LinkedList<T>* list2) {
   delete dummy;
   return p;
 }
-
 
 // https://leetcode.cn/problems/merge-k-sorted-lists/description/
 template <std::totally_ordered T>
@@ -152,6 +151,36 @@ LinkedList<T>* MergeKLists(std::vector<LinkedList<T>*>& lists) {
   LinkedList<T>* p = dummy->next;
   delete dummy;
   return p;
+}
+
+// https://leetcode.cn/problems/add-two-numbers/description/
+LinkedList<int>* AddTwoNumbers(LinkedList<int>* l1, LinkedList<int>* l2);
+
+// https://leetcode.cn/problems/partition-list/description/
+template <std::totally_ordered T>
+LinkedList<T>* Partition(LinkedList<T>* head, T x) {
+  if (head == nullptr) {
+    return nullptr;
+  }
+  LinkedList<T>* dummy1 = new LinkedList<T>(head->val);  // val 无意义
+  LinkedList<T>* dummy2 = new LinkedList<T>(head->val);  // val 无意义
+  LinkedList<T>*p1 = dummy1, *p2 = dummy2;
+  while (head != nullptr) {
+    if (head->val < x) {
+      p1->next = head;
+      p1 = p1->next;
+    } else {
+      p2->next = head;
+      p2 = p2->next;
+    }
+    head = head->next;
+  }
+  p2->next = nullptr;
+  p1->next = dummy2->next;
+  p1 = dummy1->next;
+  delete dummy1;
+  delete dummy2;
+  return p1;
 }
 }  // namespace algorithm_template
 #endif

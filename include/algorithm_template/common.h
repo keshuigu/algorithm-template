@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_TEMPLATE_COMMON_
-#define ALGORITHM_TEMPLATE_COMMON_
+#ifndef ALGORITHM_TEMPLATE_COMMON_H
+#define ALGORITHM_TEMPLATE_COMMON_H
 
 #include <concepts>
 #include <sstream>
@@ -11,4 +11,4 @@ concept Streamable = requires(std::ostream& os, T t) {
 };
 }  // namespace algorithm_template
 
-#endif
+#endif // ALGORITHM_TEMPLATE_COMMON_H

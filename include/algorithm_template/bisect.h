@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_TEMPLATE_BISECT_
-#define ALGORITHM_TEMPLATE_BISECT_
+#ifndef ALGORITHM_TEMPLATE_BISECT_H
+#define ALGORITHM_TEMPLATE_BISECT_H
 
 #include <concepts>
 #include <vector>
@@ -78,10 +78,9 @@ int FindPeak(const std::vector<int>& arr) {
     int mid = left + (right - left) / 2;
     if (arr[mid - 1] < arr[mid] && arr[mid] > arr[mid + 1]) {
       return mid;
-    }
-    else if (arr[mid - 1] > arr[mid]){
+    } else if (arr[mid - 1] > arr[mid]) {
       right = mid;
-    }else{
+    } else {
       left = mid;
     }
   }
@@ -90,4 +89,4 @@ int FindPeak(const std::vector<int>& arr) {
 }
 }  // namespace algorithm_template
 
-#endif
+#endif  // ALGORITHM_TEMPLATE_BISECT_H

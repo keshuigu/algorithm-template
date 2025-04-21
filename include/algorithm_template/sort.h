@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_TEMPLATE_SORT_
-#define ALGORITHM_TEMPLATE_SORT_
+#ifndef ALGORITHM_TEMPLATE_SORT_H
+#define ALGORITHM_TEMPLATE_SORT_H
 
 #include <concepts>
 #include <utility>
@@ -51,4 +51,4 @@ void InsertSort(std::vector<T>& arr) {
 }  // namespace algorithm_template
 
 
-#endif
+#endif //ALGORITHM_TEMPLATE_SORT_H

@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_TEMPLATE_LINKED_LIST_
-#define ALGORITHM_TEMPLATE_LINKED_LIST_
+#ifndef ALGORITHM_TEMPLATE_LINKED_LIST_H
+#define ALGORITHM_TEMPLATE_LINKED_LIST_H
 #include <concepts>
 #include <queue>
 #include <sstream>
@@ -183,4 +183,4 @@ LinkedList<T>* Partition(LinkedList<T>* head, T x) {
   return p1;
 }
 }  // namespace algorithm_template
-#endif
+#endif  // ALGORITHM_TEMPLATE_LINKED_LIST_H

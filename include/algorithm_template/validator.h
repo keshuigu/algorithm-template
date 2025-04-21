@@ -1,5 +1,5 @@
-#ifndef ALGORITHM_TEMPLATE_VALIDATOR_
-#define ALGORITHM_TEMPLATE_VALIDATOR_
+#ifndef ALGORITHM_TEMPLATE_VALIDATOR_H
+#define ALGORITHM_TEMPLATE_VALIDATOR_H
 #include <sstream>
 #include <string>
 #include <unordered_set>
@@ -39,4 +39,4 @@ int ValidFindLeft(const std::vector<int>& arr, int x);
 int ValidFindRight(const std::vector<int>& arr, int x);
 std::unordered_set<int> ValidFindPeak(const std::vector<int>& arr);
 }  // namespace algorithm_template
-#endif
+#endif  // ALGORITHM_TEMPLATE_VALIDATOR_H

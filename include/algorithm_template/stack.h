@@ -2,6 +2,7 @@
 #define ALGORITHM_TEMPLEATE_STACK_H
 
 #include <queue>
+#include <stack>
 #include <vector>
 
 namespace algorithm_template {
@@ -33,6 +34,35 @@ class MyStack {
 
  private:
   std::queue<int> q_;
+};
+
+// https://leetcode.cn/problems/min-stack/
+class MinStack {
+ public:
+  MinStack() {}
+
+  void push(int val) {
+    st_.push(val);
+    if (minst_.empty() || val <= minst_.top()) {
+      minst_.push(val);
+    }
+  }
+
+  void pop() {
+    int ret = st_.top();
+    st_.pop();
+    if (!minst_.empty() && ret == minst_.top()) {
+      minst_.pop();
+    }
+  }
+
+  int top() { return st_.top(); }
+
+  int getMin() { return minst_.top(); }
+
+ private:
+  std::stack<int> st_;
+  std::stack<int> minst_;
 };
 
 }  // namespace algorithm_template

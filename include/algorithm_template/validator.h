@@ -6,6 +6,7 @@
 #include <vector>
 
 #include "algorithm_template/common.h"
+#include "algorithm_template/tree.h"
 
 namespace algorithm_template {
 
@@ -38,5 +39,12 @@ bool ValidExist(const std::vector<int>& arr, int x);
 int ValidFindLeft(const std::vector<int>& arr, int x);
 int ValidFindRight(const std::vector<int>& arr, int x);
 std::unordered_set<int> ValidFindPeak(const std::vector<int>& arr);
+
+// tree
+
+// 接受数组形式的树，生成一个树，返回树的根节点
+// 数组可以近似以层的形式理解，只会包含非空节点以及其子结点(子结点可空，以-1表示)
+// 最后一层叶节点后无后续输入
+BiTreeNode<int>* ConstructTree(std::vector<int> input) ;
 }  // namespace algorithm_template
 #endif  // ALGORITHM_TEMPLATE_VALIDATOR_H

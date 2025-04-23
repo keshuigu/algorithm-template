@@ -79,4 +79,39 @@ std::unordered_set<int> ValidFindPeak(const std::vector<int>& arr) {
   }
   return ans;
 }
+
+BiTreeNode<int>* ConstructTree(std::vector<int> input) {
+  if (input.empty()) {
+    return nullptr;
+  }
+  BiTreeNode<int>* root = new BiTreeNode<int>(input[0]);
+  std::vector<BiTreeNode<int>*> q;
+  std::vector<BiTreeNode<int>*> t;
+  q.push_back(root);
+  int i = 1;
+  while (i < input.size()) {
+    for (int j = 0; j < q.size(); j++) {
+      BiTreeNode<int>* x = q[j];
+      if (i >= input.size()) {
+        break;
+      }
+      if (input[i] != -1) {
+        x->left = new BiTreeNode<int>(input[i]);
+        t.push_back(x->left);
+      }
+      i++;
+      if (i >= input.size()) {
+        break;
+      }
+      if (input[i] != -1) {
+        x->right = new BiTreeNode<int>(input[i]);
+        t.push_back(x->right);
+      }
+      i++;
+    }
+    q.clear();
+    std::swap(q, t);
+  }
+  return root;
+}
 }  // namespace algorithm_template

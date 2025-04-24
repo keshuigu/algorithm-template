@@ -20,6 +20,14 @@ TEST(TreeTest, InorderTraversalTest) {
   ASSERT_EQ(InorderTraversal(root), res);
 }
 
+TEST(TreeTest, InorderTraversalNorecursionTest) {
+  std::vector<int> tree{1, -1, 2, 3};
+  auto root = ConstructTree(tree);
+  std::vector<int> res{1,3,2};
+  ASSERT_EQ(InorderTraversalNorecursion(root), res);
+}
+
+
 TEST(TreeTest, PreorderTraversalTest) {
   std::vector<int> tree{1, -1, 2, 3};
   auto root = ConstructTree(tree);
@@ -27,11 +35,17 @@ TEST(TreeTest, PreorderTraversalTest) {
   ASSERT_EQ(PreorderTraversal(root), res);
 }
 
-TEST(TreeTest, PostorderTraversalTest) {
+TEST(TreeTest, PreorderTraversalNorecursionTest) {
+  std::vector<int> tree{1, -1, 2, 3};
+  auto root = ConstructTree(tree);
+  std::vector<int> res{1,2,3};
+  ASSERT_EQ(PreorderTraversalNorecursion(root), res);
+}
+
+TEST(TreeTest, PostorderTraversalNorecursionTest) {
   std::vector<int> tree{1, -1, 2, 3};
   auto root = ConstructTree(tree);
   std::vector<int> res{3,2,1};
-  ASSERT_EQ(PostorderTraversal(root), res);
+  ASSERT_EQ(PostorderTraversalNorecursion(root), res);
 }
-
 }  // namespace algorithm_template

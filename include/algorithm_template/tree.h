@@ -2,6 +2,7 @@
 #define ALGORITHM_TEMPLATE_TREE_H
 
 #include <functional>
+#include <stack>
 #include <vector>
 
 namespace algorithm_template {
@@ -32,6 +33,27 @@ std::vector<T> InorderTraversal(BiTreeNode<T>* root) {
   return ans;
 }
 
+// https://leetcode.cn/problems/binary-tree-inorder-traversal/description/
+template <typename T>
+std::vector<T> InorderTraversalNorecursion(BiTreeNode<T>* root) {
+  if (root == nullptr) {
+    return {};
+  }
+  std::stack<BiTreeNode<T>*> st;
+  std::vector<T> ans;
+  while (root || !st.empty()) {
+    while (root) {
+      st.push(root);
+      root = root->left;
+    }
+    root = st.top();
+    st.pop();
+    ans.push_back(root->val);
+    root = root->right;
+  }
+  return ans;
+}
+
 // https://leetcode.cn/problems/binary-tree-postorder-traversal/
 template <typename T>
 std::vector<T> PostorderTraversal(BiTreeNode<T>* root) {
@@ -48,6 +70,33 @@ std::vector<T> PostorderTraversal(BiTreeNode<T>* root) {
   return ans;
 }
 
+// https://leetcode.cn/problems/binary-tree-postorder-traversal/
+template <typename T>
+std::vector<T> PostorderTraversalNorecursion(BiTreeNode<T>* root) {
+  if (root == nullptr) {
+    return {};
+  }
+  std::stack<BiTreeNode<T>*> st;
+  BiTreeNode<T>* prev = nullptr;
+  std::vector<T> ans;
+  while (root || !st.empty()) {
+    while (root) {
+      st.push(root);
+      root = root->left;
+    }
+    root = st.top();
+    if (root->right == nullptr || prev == root->right) {
+      st.pop();
+      ans.push_back(root->val);
+      prev = root;
+      root = nullptr;
+    } else {
+      root = root->right;
+    }
+  }
+  return ans;
+}
+
 // https://leetcode.cn/problems/binary-tree-preorder-traversal/
 template <typename T>
 std::vector<T> PreorderTraversal(BiTreeNode<T>* root) {
@@ -61,6 +110,27 @@ std::vector<T> PreorderTraversal(BiTreeNode<T>* root) {
     dfs(root->right);
   };
   dfs(root);
+  return ans;
+}
+
+// https://leetcode.cn/problems/binary-tree-preorder-traversal/
+template <typename T>
+std::vector<T> PreorderTraversalNorecursion(BiTreeNode<T>* root) {
+  if (root == nullptr) {
+    return {};
+  }
+  std::stack<BiTreeNode<T>*> st;
+  std::vector<T> ans;
+  while (root || !st.empty()) {
+    while (root) {
+      ans.push_back(root->val);
+      st.push(root);
+      root = root->left;
+    }
+    root = st.top();
+    st.pop();
+    root = root->right;
+  }
   return ans;
 }
 

@@ -22,13 +22,19 @@ TEST(SortTest, SimpleSortTest) {
     std::vector<int> a2 = CopyArray(a1);
     std::vector<int> a3 = CopyArray(a1);
     std::vector<int> a4 = CopyArray(a1);
+    std::vector<int> a5 = CopyArray(a1);
+    std::vector<int> a6 = CopyArray(a1);
     SelectSort(a1);
     BubbleSort(a2);
     InsertSort(a3);
+    MergeSort(a5);
+    MergeSortNoRecursion(a6);
     std::sort(a4.begin(), a4.end());
     ASSERT_EQ(a1, a2) << "epoch " << i << " failed";
     ASSERT_EQ(a1, a3) << "epoch " << i << " failed";
     ASSERT_EQ(a1, a4) << "epoch " << i << " failed";
+    ASSERT_EQ(a1, a5) << "epoch " << i << " failed";
+    ASSERT_EQ(a1, a6) << "epoch " << i << " failed";
   }
 }
 

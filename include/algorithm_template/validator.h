@@ -25,6 +25,9 @@ std::string VectorToString(std::vector<T>& arr) {
 //  返回一个长度为n,值域为[1,v]的随机数组
 std::vector<int> RandomArray(int n, int v);
 
+//  返回一个长度为n,值域为[-v,v]的随机数组
+std::vector<int> RandomArrayWithNeg(int n, int v);
+
 //  返回一个长度为n,值域为[1,v]的随机不重复数组
 //  需求: v >= n
 std::vector<int> RandomNoRepeatArray(int n, int v);
@@ -46,5 +49,10 @@ std::unordered_set<int> ValidFindPeak(const std::vector<int>& arr);
 // 数组可以近似以层的形式理解，只会包含非空节点以及其子结点(子结点可空，以-1表示)
 // 最后一层叶节点后无后续输入
 BiTreeNode<int>* ConstructTree(std::vector<int> input) ;
+
+
+// divide_conquer
+long long ValidSmallSum(const std::vector<int>& arr);
+int ValidReversePairs(const std::vector<int>& arr);
 }  // namespace algorithm_template
 #endif  // ALGORITHM_TEMPLATE_VALIDATOR_H

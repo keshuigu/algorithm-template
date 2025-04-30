@@ -16,6 +16,17 @@ std::vector<int> RandomArray(int n, int v) {
   return arr;
 }
 
+std::vector<int> RandomArrayWithNeg(int n, int v) {
+  std::vector<int> arr(n);
+  std::random_device rd;   // 用于生成种子
+  std::mt19937 gen(rd());  // 使用 Mersenne Twister 作为随机数引擎
+  std::uniform_int_distribution<> dis(-v, v);  // 生成 [-v, v] 范围内的随机数
+  for (size_t i = 0; i < arr.size(); i++) {
+    arr[i] = dis(gen);
+  }
+  return arr;
+}
+
 std::vector<int> RandomNoRepeatArray(int n, int v) {
   assert(v >= n);
   std::unordered_set<int> seen;
@@ -113,5 +124,29 @@ BiTreeNode<int>* ConstructTree(std::vector<int> input) {
     std::swap(q, t);
   }
   return root;
+}
+
+long long ValidSmallSum(const std::vector<int>& arr) {
+  long long ans = 0;
+  for (int i = 0; i < arr.size(); i++) {
+    for (int j = 0; j < i; j++) {
+      if (arr[j] <= arr[i]) {
+        ans += (long long)arr[j];
+      }
+    }
+  }
+  return ans;
+}
+
+int ValidReversePairs(const std::vector<int>& arr) {
+  int ans = 0;
+  for (int i = 0; i < arr.size(); i++) {
+    for (int j = i+1; j <arr.size(); j++) {
+      if (2 * arr[j] < arr[i]) {
+        ans++;
+      }
+    }
+  }
+  return ans;
 }
 }  // namespace algorithm_template

@@ -2,6 +2,7 @@
 #define ALGORITHM_TEMPLATE_SORT_H
 
 #include <concepts>
+#include <random>
 #include <utility>
 #include <vector>
 namespace algorithm_template {
@@ -109,6 +110,80 @@ void MergeSortNoRecursion(std::vector<T>& arr) {
       l = r + 1;
     }
   }
+}
+
+template <std::totally_ordered T>
+int Partition0(std::vector<T>& arr, int l, int r, int x) {
+  int idx = l, xi = 0;
+  for (int i = l; i <= r; i++) {
+    if (arr[i] <= x) {
+      std::swap(arr[i], arr[idx]);
+      if (arr[idx] == x) {
+        xi = idx;
+      }
+      idx++;
+    }
+  }
+  //  将任意一个等于x的下标交换到 <=x的最后一个位置
+  std::swap(arr[xi], arr[idx - 1]);
+  return idx - 1;
+}
+
+template <std::totally_ordered T>
+void RandomQuickSort0(std::vector<T>& arr, int l, int r, std::mt19937 gen) {
+  if (l >= r) {
+    return;
+  }
+  std::uniform_int_distribution<> dis(l, r);
+  int x = arr[dis(gen)];
+  int m = Partition0(arr, l, r, x);
+  RandomQuickSort0(arr, l, m - 1, gen);
+  RandomQuickSort0(arr, m + 1, r, gen);
+}
+
+template <std::totally_ordered T>
+std::pair<int, int> Partition1(std::vector<T>& arr, int l, int r, int x) {
+  int li = l, ri = r;
+  int i = l;
+  while (i <= ri) {
+    if (arr[i] < x) {
+      std::swap(arr[i], arr[li]);
+      li++;
+      i++;
+    } else if (arr[i] > x) {
+      std::swap(arr[i], arr[ri]);
+      ri--;
+    } else {
+      i++;
+    }
+  }
+  return {li, ri};
+}
+
+template <std::totally_ordered T>
+void RandomQuickSort1(std::vector<T>& arr, int l, int r, std::mt19937 gen) {
+  if (l >= r) {
+    return;
+  }
+  std::uniform_int_distribution<> dis(l, r);
+  int x = arr[dis(gen)];
+  auto [li, ri] = Partition1(arr, l, r, x);
+  RandomQuickSort1(arr, l, li - 1, gen);
+  RandomQuickSort1(arr, ri + 1, r, gen);
+}
+
+template <std::totally_ordered T>
+void RandomQuickSort(std::vector<T>& arr) {
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  RandomQuickSort0(arr, 0, arr.size() - 1, gen);
+}
+
+template <std::totally_ordered T>
+void RandomQuickSortImprove(std::vector<T>& arr) {
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  RandomQuickSort1(arr, 0, arr.size() - 1, gen);
 }
 
 }  // namespace algorithm_template

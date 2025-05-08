@@ -18,6 +18,9 @@ long long SmallSum(std::vector<int>& arr);
 
 // https://leetcode.cn/problems/reverse-pairs/
 int ReversePairs(std::vector<int>& arr);
+
+// https://leetcode.cn/problems/kth-largest-element-in-an-array/description/
+int FindKthLargest(const std::vector<int>& nums, int k);
 }  // namespace algorithm_template
 
 #endif  // ALGORITHM_TEMPLATE_DIVIDE_CONQUER_H

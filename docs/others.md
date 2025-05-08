@@ -14,6 +14,6 @@ $$ T(n) = aT\left(\frac{n}{b}\right) + f(n) $$
 
 1. 如果$\log_ba > c$,时间复杂度为$O(N^{\log_ba})$
 2. 如果$\log_ba < c$,时间复杂度为$O(N^c)$
-3. 如果$\log_ba < c$,时间复杂度为$O(N^c * \log N)$
+3. 如果$\log_ba = c$,时间复杂度为$O(N^c * \log N)$
 
 4. f(n)时间复杂度为$O(N * \log N)$ 且 a = b = 2 时，总体实现复杂度为$O(N * {(\log N)}^2)$

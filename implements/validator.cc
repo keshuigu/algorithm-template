@@ -141,12 +141,18 @@ long long ValidSmallSum(const std::vector<int>& arr) {
 int ValidReversePairs(const std::vector<int>& arr) {
   int ans = 0;
   for (int i = 0; i < arr.size(); i++) {
-    for (int j = i+1; j <arr.size(); j++) {
+    for (int j = i + 1; j < arr.size(); j++) {
       if (2 * arr[j] < arr[i]) {
         ans++;
       }
     }
   }
   return ans;
+}
+
+int VaidFindKthLargest(const std::vector<int>& arr, int k) {
+  std::vector<int> tmp(arr.begin(), arr.end());
+  std::sort(tmp.begin(), tmp.end());
+  return tmp[k];
 }
 }  // namespace algorithm_template

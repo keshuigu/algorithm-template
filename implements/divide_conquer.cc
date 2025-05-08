@@ -1,5 +1,7 @@
 #include "algorithm_template/divide_conquer.h"
 
+#include <random>
+
 #include "algorithm_template/sort.h"  // merge
 namespace algorithm_template {
 
@@ -60,8 +62,8 @@ int ReversePairs0(std::vector<int>& arr, int l, int r) {
   int k = 0;
   long long tmp = 0;
   while (p1 <= m && p2 <= r) {
-    if ((long long )arr[p1] <= 2LL * arr[p2]) {
-      tmp += r -p2 + 1;
+    if ((long long)arr[p1] <= 2LL * arr[p2]) {
+      tmp += r - p2 + 1;
       p1++;
     } else {
       p2++;
@@ -74,5 +76,63 @@ int ReversePairs0(std::vector<int>& arr, int l, int r) {
 
 int ReversePairs(std::vector<int>& arr) {
   return ReversePairs0(arr, 0, arr.size() - 1);
+}
+
+namespace {
+
+std::pair<int, int> PartitionFindKthLargest(std::vector<int>& arr, int l, int r,
+                                            int x) {
+  int li = l, ri = r;
+  int i = l;
+  while (i <= ri) {
+    if (arr[i] < x) {
+      std::swap(arr[i], arr[li]);
+      li++;
+      i++;
+    } else if (arr[i] > x) {
+      std::swap(arr[i], arr[ri]);
+      ri--;
+    } else {
+      i++;
+    }
+  }
+  return {li, ri};
+}
+
+int FindKthLargest0(std::vector<int>& arr, int l, int r, int k,
+                    std::mt19937 gen) {
+  std::uniform_int_distribution<> dis(l, r);
+  int x = arr[dis(gen)];
+  auto [li, ri] = PartitionFindKthLargest(arr, l, r, x);
+  if (k < li) {
+    return FindKthLargest0(arr, l, li - 1, k, gen);
+  } else if (k > ri) {
+    return FindKthLargest0(arr, ri + 1, r, k, gen);
+  } else {
+    return x;
+  }
+}
+
+}  // namespace
+
+int FindKthLargest(const std::vector<int>& nums, int k) {
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  std::vector<int> tmp(nums.begin(), nums.end());
+  // 递归
+  // return FindKthLargest0(tmp, 0, tmp.size() - 1, k, gen);
+  // 迭代
+  for (int l = 0, r = tmp.size() - 1; l <= r;) {
+    std::uniform_int_distribution<> dis(l, r);
+    auto [li, ri] = PartitionFindKthLargest(tmp, l, r, tmp[dis(gen)]);
+    if (k > ri) {
+      l = ri + 1;
+    } else if (k < li) {
+      r = li - 1;
+    } else {
+      return tmp[k];
+    }
+  }
+  return -1;
 }
 }  // namespace algorithm_template

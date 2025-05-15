@@ -5,6 +5,8 @@
 #include <random>
 #include <utility>
 #include <vector>
+
+#include "algorithm_template/heap.h"
 namespace algorithm_template {
 
 template <std::totally_ordered T>
@@ -184,6 +186,18 @@ void RandomQuickSortImprove(std::vector<T>& arr) {
   std::random_device rd;
   std::mt19937 gen(rd());
   RandomQuickSort1(arr, 0, arr.size() - 1, gen);
+}
+
+template <std::totally_ordered T>
+void HeapSort(std::vector<T>& arr) {
+  std::less<T> cmp;
+  for (int i = (arr.size() - 1) / 2; i >= 0; i--) {
+    HeapifyDown(arr, i,arr.size(), cmp);
+  }
+  for (int i = arr.size() - 1; i > 0; i--) {
+    std::swap(arr[i],arr[0]);
+    HeapifyDown(arr,0,i,cmp);
+  }
 }
 
 }  // namespace algorithm_template

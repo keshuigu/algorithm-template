@@ -58,4 +58,33 @@ TEST(HeapTest, MyHeapTest) {
   }
 }
 
+TEST(HeapTest, MaxCoverTest) {
+  int N = 5;
+  int V = 10;
+  int epoch = 50000;
+  std::random_device rd;
+  std::mt19937 gen(rd());
+  std::uniform_int_distribution<> dis(1, N - 1);
+  std::uniform_int_distribution<> disV(1, V);
+  for (int i = 0; i < epoch; i++) {
+    std::vector<std::vector<int>> lines;
+    std::vector<std::string> out;
+    int n = dis(gen);
+    for (int j = 0; j < n; j++) {
+      int a = disV(gen);
+      while (a == V) {
+        a = disV(gen);
+      }
+      int b = disV(gen);
+      while (a >= b) {
+        b = disV(gen);
+      }
+      lines.push_back({a, b});
+      out.push_back("{" + std::to_string(a) + "-" + std::to_string(b) + "}");
+    }
+    ASSERT_EQ(ValidMaxCover(lines), MaxCover(lines)) << VectorToString(out);
+    ASSERT_EQ(ValidMaxCover(lines), MaxCoverWithHeap(lines)) << VectorToString(out);
+  }
+}
+
 }  // namespace algorithm_template

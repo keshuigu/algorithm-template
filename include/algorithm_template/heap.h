@@ -14,7 +14,7 @@ i 的右子节点 (2 * i) + 2
 namespace algorithm_template {
 
 template <typename T, typename Compare = std::less<T>>
-void HeapifyUp(std::vector<T>& arr, size_t idx,const Compare& cmp) {
+void HeapifyUp(std::vector<T>& arr, size_t idx, const Compare& cmp) {
   while (idx > 0) {
     size_t parent = (idx - 1) / 2;
     // 默认大根堆 传入less
@@ -28,7 +28,8 @@ void HeapifyUp(std::vector<T>& arr, size_t idx,const Compare& cmp) {
   }
 }
 template <typename T, typename Compare = std::less<T>>
-void HeapifyDown(std::vector<T>& arr, size_t idx, size_t size,const Compare& cmp) {
+void HeapifyDown(std::vector<T>& arr, size_t idx, size_t size,
+                 const Compare& cmp) {
   while (true) {
     size_t l = 2 * idx + 1;
     size_t r = 2 * idx + 2;
@@ -61,7 +62,7 @@ class Heap {
     // 从最后一个非叶子节点开始调整
     // o(n)
     for (int i = (data_.size() - 1) / 2; i >= 0; i--) {
-      HeapifyDown(data_, i,data_.size(), cmp_);
+      HeapifyDown(data_, i, data_.size(), cmp_);
     }
   }
 
@@ -86,11 +87,19 @@ class Heap {
     return data_.front();
   }
 
+  bool Empty() const { return data_.empty(); }
+  size_t Size() const { return data_.size(); }
+
  private:
   std::vector<T> data_;
   Compare cmp_;
 };
 
+// https://www.nowcoder.com/practice/1ae8d0b6bb4e4bcdbf64ec491f63fc37
+int MaxCover(const std::vector<std::vector<int>> lines);
+int MaxCoverWithHeap(std::vector<std::vector<int>> lines);
+// https://leetcode.cn/problems/minimum-operations-to-halve-array-sum/description/
+int HalveArray(std::vector<int>& nums);
 }  // namespace algorithm_template
 
 #endif  // ALGORITHM_TEMPLATE_HEAP_H

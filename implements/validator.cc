@@ -150,9 +150,23 @@ int ValidReversePairs(const std::vector<int>& arr) {
   return ans;
 }
 
-int VaidFindKthLargest(const std::vector<int>& arr, int k) {
+int ValidFindKthLargest(const std::vector<int>& arr, int k) {
   std::vector<int> tmp(arr.begin(), arr.end());
   std::sort(tmp.begin(), tmp.end());
   return tmp[k];
+}
+
+int ValidMaxCover(const std::vector<std::vector<int>>& arr) {
+  int ans = 0;
+  for (int i = 0; i < 1100; i++) {
+    int tmp = 0;
+    for (int j = 0; j < arr.size(); j++) {
+      if (arr[j][0] < i && arr[j][1] >= i) {
+        tmp++;
+      }
+    }
+    ans = std::max(ans, tmp);
+  }
+  return ans;
 }
 }  // namespace algorithm_template

@@ -54,6 +54,9 @@ BiTreeNode<int>* ConstructTree(std::vector<int> input) ;
 // divide_conquer
 long long ValidSmallSum(const std::vector<int>& arr);
 int ValidReversePairs(const std::vector<int>& arr);
-int VaidFindKthLargest(const std::vector<int>& arr, int k);
+int ValidFindKthLargest(const std::vector<int>& arr, int k);
+
+// heap
+int ValidMaxCover(const std::vector<std::vector<int>>& arr);
 }  // namespace algorithm_template
 #endif  // ALGORITHM_TEMPLATE_VALIDATOR_H

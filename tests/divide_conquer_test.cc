@@ -53,7 +53,7 @@ TEST(DivideConquerTest, FindKthLargestTest) {
 
     std::uniform_int_distribution<> disK(0, n - 1);
     int k = disK(gen);
-    int expect = VaidFindKthLargest(a1, k);
+    int expect = ValidFindKthLargest(a1, k);
     int ret = FindKthLargest(a1, k);
     ASSERT_EQ(expect, ret);
   }

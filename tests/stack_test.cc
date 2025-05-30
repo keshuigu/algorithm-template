@@ -1,6 +1,10 @@
 #include "algorithm_template/stack.h"
 
+#include <random>
+
+#include "algorithm_template/validator.h"
 #include "gtest/gtest.h"
+
 namespace algorithm_template {
 TEST(StackTest, MyStackTest) {
   MyStack st;
@@ -20,5 +24,6 @@ TEST(StackTest, MinStackTest) {
   ASSERT_EQ(0, st.top());
   ASSERT_EQ(-2, st.getMin());
 }
+
 
 }  // namespace algorithm_template

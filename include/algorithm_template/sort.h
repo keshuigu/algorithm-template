@@ -192,14 +192,17 @@ template <std::totally_ordered T>
 void HeapSort(std::vector<T>& arr) {
   std::less<T> cmp;
   for (int i = (arr.size() - 1) / 2; i >= 0; i--) {
-    HeapifyDown(arr, i,arr.size(), cmp);
+    HeapifyDown(arr, i, arr.size(), cmp);
   }
   for (int i = arr.size() - 1; i > 0; i--) {
-    std::swap(arr[i],arr[0]);
-    HeapifyDown(arr,0,i,cmp);
+    std::swap(arr[i], arr[0]);
+    HeapifyDown(arr, 0, i, cmp);
   }
 }
 
+// 假定非负，最大值不超过10^10
+void RadixSort(std::vector<int>& arr);
+void RadixSortLessRoom(std::vector<int>& arr);
 }  // namespace algorithm_template
 
 #endif  // ALGORITHM_TEMPLATE_SORT_H

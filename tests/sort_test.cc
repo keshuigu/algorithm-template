@@ -27,15 +27,19 @@ TEST(SortTest, SimpleSortTest) {
     std::vector<int> a7 = CopyArray(a1);
     std::vector<int> a8 = CopyArray(a1);
     std::vector<int> a9 = CopyArray(a1);
+    std::vector<int> a10 = CopyArray(a1);
+    std::vector<int> a11 = CopyArray(a1);
     SelectSort(a1);
     BubbleSort(a2);
     InsertSort(a3);
+    std::sort(a4.begin(), a4.end());
     MergeSort(a5);
     MergeSortNoRecursion(a6);
     RandomQuickSort(a7);
     RandomQuickSortImprove(a8);
     HeapSort(a9);
-    std::sort(a4.begin(), a4.end());
+    RadixSort(a10);
+    RadixSortLessRoom(a11);
     ASSERT_EQ(a1, a2) << "epoch " << i << " failed";
     ASSERT_EQ(a1, a3) << "epoch " << i << " failed";
     ASSERT_EQ(a1, a4) << "epoch " << i << " failed";
@@ -44,6 +48,8 @@ TEST(SortTest, SimpleSortTest) {
     ASSERT_EQ(a1, a7) << "epoch " << i << " failed";
     ASSERT_EQ(a1, a8) << "epoch " << i << " failed";
     ASSERT_EQ(a1, a9) << "epoch " << i << " failed";
+    ASSERT_EQ(a1, a10) << "epoch " << i << " failed";
+    ASSERT_EQ(a1, a11) << "epoch " << i << " failed";
   }
 }
 
